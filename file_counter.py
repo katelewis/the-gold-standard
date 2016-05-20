@@ -9,7 +9,7 @@ import csv,os,glob
 
 #file vars
 path="D:\Datasets\Del Mar Goldline Station\\del_mar_complete"
-file_end=["ENT","PAR","PPA","VAL","PAS",]
+file_end=["ENT","PAR","PPA","VAL","PAS"]
 delim=';'
 
 os.chdir(path)
@@ -17,7 +17,9 @@ os.chdir(path)
 
 for end in file_end:
     i = 0
+    file_count=0
     for myfile in glob.glob("*."+end):
+        file_count+=1
         with open(myfile,'r') as f:
             line=f.readline() #header countains file count
             if len(line.strip())==0:
@@ -25,4 +27,4 @@ for end in file_end:
                 continue
             i+=int(line.strip().split(delim)[3])
 
-    print "Total entries for "+end+" "+str(i)
+    print "Total entries for "+end+" "+str(i)+" across "+str(file_count)+" files."
